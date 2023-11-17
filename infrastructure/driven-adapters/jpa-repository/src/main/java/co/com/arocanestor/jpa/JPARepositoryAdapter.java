@@ -1,14 +1,15 @@
-package co.com.arocanestor.r2dbc;
+package co.com.arocanestor.jpa;
 
-import co.com.arocanestor.r2dbc.helper.ReactiveAdapterOperations;
+import co.com.arocanestor.jpa.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MyReactiveRepositoryAdapter extends ReactiveAdapterOperations<Object/* change for domain model */, Object/* change for adapter model */, String, MyReactiveRepository>
+public class JPARepositoryAdapter extends AdapterOperations<Object/* change for domain model */, Object/* change for adapter model */, String, JPARepository>
 // implements ModelRepository from domain
 {
-    public MyReactiveRepositoryAdapter(MyReactiveRepository repository, ObjectMapper mapper) {
+
+    public JPARepositoryAdapter(JPARepository repository, ObjectMapper mapper) {
         /**
          *  Could be use mapper.mapBuilder if your domain model implement builder pattern
          *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());
@@ -16,5 +17,4 @@ public class MyReactiveRepositoryAdapter extends ReactiveAdapterOperations<Objec
          */
         super(repository, mapper, d -> mapper.map(d, Object.class/* change for domain model */));
     }
-
 }
